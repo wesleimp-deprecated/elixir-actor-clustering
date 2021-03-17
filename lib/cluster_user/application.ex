@@ -16,11 +16,10 @@ defmodule ClusterUser.Application do
 
   @topologies [
     kubernetes: [
-      strategy: Elixir.Cluster.Strategy.Kubernetes,
+      strategy: Cluster.Strategy.Kubernetes,
       config: [
         mode: :dns,
         service: "cluster-user",
-        application_name: "cluster-user",
         kubernetes_node_basename: "cluster-user",
         kubernetes_selector: "app=cluster-user",
         kubernetes_namespace: "local",

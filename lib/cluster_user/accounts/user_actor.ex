@@ -14,8 +14,8 @@ defmodule ClusterUser.Accounts.User.Actor do
     pid
   end
 
-  def start_link(%{id: id} = _state) do
-    GenServer.start_link(__MODULE__, [id])
+  def start_link(%{id: _id} = state) do
+    GenServer.start_link(__MODULE__, [state])
   end
 
   def init(state) do

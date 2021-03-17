@@ -1,1 +1,0 @@
--name <%= release_name %>@${MY_POD_IP}
