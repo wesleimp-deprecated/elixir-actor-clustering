@@ -1,10 +1,10 @@
 defmodule ClusterUser.Accounts do
   def add_user(user) do
-    ClusterUser.Accounts.User.DynamicSupervisor.register(user)
+    ClusterUser.Accounts.User.Actor.register_actor(user)
   end
 
   def fetch_user(id) do
-    {:ok, pid} = ClusterUser.Accounts.User.Registry.lookup_user(id)
-    ClusterUser.Accounts.User.Actor.fetch_user(pid)
+    Swarm.whereis_name(id)
+    |> ClusterUser.Accounts.User.Actor.fetch_user()
   end
 end

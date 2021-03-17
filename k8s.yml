@@ -47,15 +47,3 @@ spec:
       protocol: TCP
 status:
   loadBalancer: {}
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: cluster-user
-  namespace: local
-spec:
-  selector:
-    app: cluster-user
-  ports:
-    - name: epmd
-      port: 4369

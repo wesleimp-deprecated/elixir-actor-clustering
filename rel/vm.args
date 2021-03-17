@@ -1,1 +1,1 @@
--name app@<%=`(hostname -f)`%>
+-name <%= release_name %>@${MY_POD_IP}

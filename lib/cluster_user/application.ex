@@ -6,7 +6,6 @@ defmodule ClusterUser.Application do
   use Application
 
   @user_supervisor [
-    ClusterUser.Accounts.User.Registry.child_spec(),
     ClusterUser.Accounts.User.DynamicSupervisor
   ]
   @phoenix [
