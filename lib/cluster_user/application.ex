@@ -7,8 +7,8 @@ defmodule ClusterUser.Application do
     ClusterUser.Accounts.User.DynamicSupervisor
   ]
   @cluster_supervisor [
-    ClusterUser.ApplicationRegistry.child_spec(),
-    ClusterUser.ApplicationSupervisor.child_spec()
+    ClusterUser.ApplicationRegistry,
+    ClusterUser.ApplicationSupervisor
   ]
   @phoenix [
     ClusterUserWeb.Telemetry,
