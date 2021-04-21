@@ -15,7 +15,6 @@ defmodule ClusterUser.Accounts.User.DynamicSupervisor do
   def register(user) do
     child_spec = %{
       id: ClusterUser.Accounts.User.Actor,
-      name: user,
       start: {ClusterUser.Accounts.User.Actor, :start_link, [user]},
       restart: :transient
     }
