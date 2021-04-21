@@ -1,24 +1,30 @@
 defmodule ClusterUser.Accounts.User.DynamicSupervisor do
-  use DynamicSupervisor
+  use Horde.DynamicSupervisor
+  require Logger
 
-  def start_link(opts) do
-    DynamicSupervisor.start_link(__MODULE__, opts, name: __MODULE__)
-  end
+  alias Horde.DynamicSupervisor, as: HordeDynamicSupervisor
 
   def init(_) do
-    DynamicSupervisor.init(strategy: :one_for_one)
+    HordeDynamicSupervisor.init(strategy: :one_for_one)
+  end
+
+  def start_link(opts) do
+    HordeDynamicSupervisor.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
   def register(user) do
     child_spec = %{
       id: ClusterUser.Accounts.User.Actor,
+      name: user,
       start: {ClusterUser.Accounts.User.Actor, :start_link, [user]},
       restart: :transient
     }
 
-    case DynamicSupervisor.start_child(__MODULE__, child_spec) do
+    case HordeDynamicSupervisor.start_child(__MODULE__, child_spec) do
       {:error, {:already_started, pid}} -> {:ok, pid}
       {:ok, pid} -> {:ok, pid}
     end
   end
+
+  def via_tuple(id), do: {:via, Horde.Registry, {ClusterUser.ApplicationRegistry, id}}
 end

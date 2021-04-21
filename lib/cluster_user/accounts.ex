@@ -4,7 +4,6 @@ defmodule ClusterUser.Accounts do
   end
 
   def fetch_user(id) do
-    Swarm.whereis_name(id)
-    |> ClusterUser.Accounts.User.Actor.fetch_user()
+    ClusterUser.Accounts.User.Actor.fetch_user(id)
   end
 end
