@@ -16,6 +16,22 @@ config :cluster_user, ClusterUserWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+# Config libcluster
+config :libcluster,
+  topologies: [
+    kubernetes: [
+      strategy: Cluster.Strategy.Kubernetes,
+      config: [
+        mode: :dns,
+        service: "cluster-user",
+        kubernetes_node_basename: "cluster-user",
+        kubernetes_selector: "app=cluster-user",
+        kubernetes_namespace: "local",
+        polling_interval: 10_000
+      ]
+    ]
+  ]
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

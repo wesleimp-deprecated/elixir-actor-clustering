@@ -42,7 +42,7 @@ defmodule ClusterUser.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:libcluster, "~> 3.2"},
-      {:swarm, "~> 3.4"}
+      {:horde, "~> 0.8"}
     ]
   end
 
